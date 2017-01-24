@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Terminals List</title>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/home.css"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+     
+    </head>
+    <body onload="">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/about">Terminal Access Diploma</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li><a href="/home">Home</a></li>
+                <li class="active"><a href="/terminals">Terminals</a></li>
+                <li><a href="/staff">Staff</a></li> 
+                <li><a href="/about">About the project</a></li> 
+              </ul>
+                <ul class="navbar navbar-nav navbar-right">
+                    <li><form id ="logout" th:action="@{/logout}" method="post">
+                            <input type="submit" value="Sign Out" class="form-control"/>
+                        </form>
+                    </li>
+                  </ul>
+            </div>
+        </nav>
+        
+        <div class="jumbotron" >
+            <div id="hero">
+                <h2>Terminals List</h2> 
+                <p>In this section you can view the list of terminals</p> 
+            </div>
+        </div>
+        
+        <table id="data-table" class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Location</th>
+                      <th>Is Active</th>
+                      <th>Special key</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr th:each="t : ${terminalsList}">
+                        <td th:text="${t.terminalData.name}"></td>
+                        <td th:text="${t.terminalData.description}"></td>
+                        <td th:text="${t.terminalData.location}"></td>
+                        <td th:text="${t.isActive}"></td>
+                        <td th:text="${t.specialCode}"></td>
+                        <td><a th:href="@{'/terminals/' + ${t.id}}" >View</a></td>
+                      </tr>
+                  </tbody>  
+        </table>
+    </body>
+</html>
+

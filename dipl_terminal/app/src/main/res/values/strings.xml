@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Diploma Terminal</string>
+
+    <string name="title_activity_qrcode_reader">Diploma Access Terminal</string>
+</resources>

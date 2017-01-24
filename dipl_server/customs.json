@@ -1,0 +1,11 @@
+{
+    "elements": {},
+    "attributes": {
+        "aria-expanded": {
+            "context": "button"
+        },
+        "th:inline": {
+            "context": "h2"
+        }
+    }
+}

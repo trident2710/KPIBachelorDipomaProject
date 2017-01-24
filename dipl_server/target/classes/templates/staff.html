@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Staff member</title>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/home.css"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      
+      
+    </head>
+    <body onload="">
+        <h2 th:text="@{'Staff member № ' + ${staff.id}}"></h2>
+         <div class="jumbotron" >
+            <div id="hero">
+                <h2>General Information</h2> 
+                <div class="well">
+                    <ul>
+                        <li><b style="bold">Name:  </b><p th:text="${staff.staffInfo.name}"></p></li>
+                    </ul>
+                    <ul>
+                        <li><b style="bold">Surname:  </b><p th:text="${staff.staffInfo.surname}"></p></li>
+                    </ul>
+                    <ul>
+                        <li><b style="bold">Age:  </b><p th:text="${staff.staffInfo.age}"></p></li>
+                    </ul>
+                    <ul>
+                        <li><b style="bold">Position:  </b><p th:text="${staff.staffPosition.position}"></p></li>
+                    </ul>
+                    <ul>
+                        <li><b style="bold">Special code:  </b><p th:text="${staff.specialCode}"></p></li>
+                    </ul>
+                    <td><a th:href="@{'http://api.qrserver.com/v1/create-qr-code/?data='+${staff.specialCode}}" >View QRCode</a></td>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron" >
+            <div id="hero">
+                <h2>Terminals which the staff member has access to:</h2> 
+                <table id="data-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th>Terminal name</th>
+                          <th>Description</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr th:each="s : ${staff.terminalList}">
+                            <td th:text="${s.terminalData.name}"></td>
+                            <td th:text="${s.terminalData.description}"></td>
+                            <td><a th:href="@{'/terminals/' + ${s.id}}" >View</a></td>
+                          </tr>
+                      </tbody>  
+                </table>
+            </div>
+        </div>
+        <div class="jumbotron" >
+            <div id="hero">
+                <h2>Events which occured with this staff member during the last time:</h2> 
+                <table id="data-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th>Id</th>
+                          <th>Event type</th>
+                          <th>Terminal</th>
+                          <th>Time when occured</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr th:each="s : ${staff.eventList}">
+                            <td th:text="${s.id}"></td>
+                            <td th:text="${s.eventType.type}"></td>
+                            <td th:text="${s.terminal.terminalData.name}"></td>
+                            <td th:text="${s.getCreationDateString()}"></td>
+                          </tr>
+                      </tbody>  
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+

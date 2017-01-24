@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.kpi.fpm_diploma_jar_0.1.0PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>home.model.EventType</class>
+    <class>home.model.UserData</class>
+    <class>home.model.Event</class>
+    <class>home.model.StaffMember_1</class>
+    <class>home.model.UserAccessLevel</class>
+    <class>home.model.StaffPosition</class>
+    <class>home.model.Terminal_1</class>
+    <class>home.model.StaffInfo</class>
+    <class>home.model.User</class>
+    <class>home.model.StaffMember</class>
+    <class>home.model.Terminal</class>
+    <class>home.model.TerminalStaffAccess</class>
+    <class>home.model.TerminalData</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/object_access_diploma?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="anarchist1994"/>
+    </properties>
+  </persistence-unit>
+</persistence>

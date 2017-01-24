@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <script src="sockjs-0.3.4.js"></script>
+    <script src="stomp.js"></script>
+    <script type="text/javascript">
+        var stompClient = null;
+
+
+function drawTable(data) {
+    for (var i = 0; i < data.length; i++) {
+        drawRow(data[i]);
+    }
+}
+
+function drawRow(rowData) {
+    var row = $("<tr />")
+    $("#eventDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+    row.append($("<td>" + rowData.idEvent + "</td>"));
+}
+
+function setConnected(connected) {
+    document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+    document.getElementById('response').innerHTML = '';
+}
+
+function connect() {
+    var socket = new SockJS('broadcast/events/get/all');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('broadcast/events', function(greeting){
+            showEvents(JSON.parse(greeting.body));
+        });
+        stompClient.subscribe('heartbeat/answer', function(greeting){
+            showEvents(JSON.parse(greeting.body));
+        });
+    });
+}
+
+function disconnect() {
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+function sendRequest() {
+    stompClient.send("/app/broadcast/events/get/all", {},{});
+}
+
+function showEvents(message) {
+    console.log("Events: "+JSON.stringify(message));
+    drawTable(message);
+}
+
+connect();
+    </script>
+
+
+    
